@@ -44,6 +44,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Apply Kubernetes Service') {
+            steps {
+                withKubeConfig([credentialsId: env.KUBECONFIG_CREDENTIALS_ID]) {
+                    sh '''
+                    kubectl apply -f service.yaml
+                    '''
+                }
+            }
+        }
     }
 
     post {
