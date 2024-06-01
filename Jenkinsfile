@@ -7,7 +7,7 @@ pipeline {
         IMAGE = 'alimiyn/ecommerce:latest'
         KUBECONFIG_CREDENTIALS_ID = 'kube-file'
         KUBECONFIG = credentials('kube-file')
-        DOCKER_CREDENTIALS_ID = 'docker-details'
+        DOCKER_CREDENTIALS_ID = 'docker'
         GIT_CREDENTIALS_ID = 'Aylanesa7'
         GIT_CREDENTIALS = credentials('Aylanesa7')
     }
