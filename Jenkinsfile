@@ -14,8 +14,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
+                    sh '''
                     git config --global http.version HTTP/1.1
                     git config --global http.postBuffer 524288000
+                    '''
                 }
                 retry(3) {
                     git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins'
