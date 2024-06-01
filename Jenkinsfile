@@ -16,7 +16,7 @@ pipeline {
             steps {
                     script {
                         git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins',
-                        credentialsId:${env.GIT_CREDENTIALS}
+                        credentialsId:"${GIT_CREDENTIALS}"
                     }
             }
         }
