@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${env.REPO}:${env.BUILD_NUMBER}")
+                    docker.build("${env.IMAGE}:${env.DOCKER_CREDENTIALS_ID}")
                 }
             }
         }
@@ -31,8 +31,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', env.DOCKER_CREDENTIALS_ID) {
-                        dockerImage.push()
-                        dockerImage.push('latest')
+                        docker.image("${env.IMAGE}:latest").push()
                     }
                 }
             }
