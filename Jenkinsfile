@@ -20,7 +20,11 @@ pipeline {
                     '''
                 }
                 retry(3) {
-                    git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins'
+                    script {
+                        def branch = 'main'
+                        echo "Checking out branch: ${branch}"
+                        git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins'
+                    }
                 }
             }
         }
