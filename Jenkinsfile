@@ -22,7 +22,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sudo docker.build("${env.REGISTRY}/:${env.IMAGE}")
+                    sudo docker.build("${env.REGISTRY}/${env.IMAGE}")
                 }
             }
         }
