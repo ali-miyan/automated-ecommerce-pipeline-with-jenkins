@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/ali-miyan/ecommerce'
+                git 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins'
             }
         }
 
