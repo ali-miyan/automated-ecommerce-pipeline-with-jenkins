@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins',
+                        git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins.git',
                             credentialsId: GIT_CREDENTIALS_ID,
                             username: USERNAME,
                             password: PASSWORD
