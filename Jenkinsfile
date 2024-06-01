@@ -8,16 +8,21 @@ pipeline {
         KUBECONFIG_CREDENTIALS_ID = 'kube-file'
         KUBECONFIG = credentials('kube-file')
         DOCKER_CREDENTIALS_ID = 'docker-details'
-        GIT_CREDENTIALS = credentials('Aylanesa7')
+        GIT_CREDENTIALS_ID = 'Aylanesa7'
+        GIT_CREDENTIALS = credentials(GIT_CREDENTIALS_ID)
     }
 
     stages {
         stage('Checkout') {
             steps {
-                    script {
+                script {
+                    withCredentials([usernamePassword(credentialsId: GIT_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         git url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins',
-                        credentialsId:"${GIT_CREDENTIALS}"
+                            credentialsId: GIT_CREDENTIALS_ID,
+                            username: USERNAME,
+                            password: PASSWORD
                     }
+                }
             }
         }
         stage('Build Docker Image') {
