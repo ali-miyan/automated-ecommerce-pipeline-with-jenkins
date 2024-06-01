@@ -9,7 +9,7 @@ pipeline {
         KUBECONFIG = credentials('kube-file')
         DOCKER_CREDENTIALS_ID = 'docker-details'
         GIT_CREDENTIALS_ID = 'Aylanesa7'
-        GIT_CREDENTIALS = credentials(GIT_CREDENTIALS_ID)
+        GIT_CREDENTIALS = credentials('Aylanesa7')
     }
 
     stages {
