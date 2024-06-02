@@ -31,7 +31,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("https://${env.REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
-                        docker.image("${env.REPO}").push('latest')
+                        def dok =  docker.image("${env.REGISTRY}/${env.IMAGE}")
+                        dok.push()
                     }
                 }
             }
