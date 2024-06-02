@@ -4,7 +4,8 @@ pipeline {
     environment {
         REGISTRY = 'hub.docker.com'
         REPO = 'alimiyn/ecommerce'
-        IMAGE = 'alimiyn/ecommerce:latest'
+        IMAGE = 'alimiyn/ecommerce'
+        TAG = 'latest'
         KUBECONFIG_CREDENTIALS_ID = 'kube-file'
         KUBECONFIG = credentials('kube-file')
         DOCKER_CREDENTIALS_ID = 'docker'
@@ -15,17 +16,17 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', 
+                git branch: 'main',
                     url: 'https://github.com/ali-miyan/automated-ecommerce-pipeline-with-jenkins.git'
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${env.REGISTRY}/${env.IMAGE}")
+                    docker.build("${env.REGISTRY}/${env.IMAGE}:${env.TAG}")
                 }
             }
-        }
+        }   
 
         stage('Push Docker Image') {
             steps {
@@ -37,8 +38,8 @@ pipeline {
                         '''
                         
                         sh '''
-                        docker tag ${IMAGE} registry.hub.docker.com/${IMAGE}
-                        docker push registry.hub.docker.com/${IMAGE}
+                        docker tag ${IMAGE}:${TAG} registry.hub.docker.com/${DOCKER_USERNAME}/${IMAGE}:${TAG}
+                        docker push registry.hub.docker.com/${DOCKER_USERNAME}/${IMAGE}:${TAG}
                         '''
                         
                         sh "docker logout registry.hub.docker.com"
