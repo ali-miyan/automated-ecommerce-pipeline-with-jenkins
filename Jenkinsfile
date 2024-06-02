@@ -38,8 +38,8 @@ pipeline {
                         '''
                         
                         sh '''
-                        docker tag ${IMAGE}:${TAG} registry.hub.docker.com/${DOCKER_USERNAME}/${IMAGE}:${TAG}
-                        docker push registry.hub.docker.com/${DOCKER_USERNAME}/${IMAGE}:${TAG}
+                        docker tag ${IMAGE}:${TAG} registry.hub.docker.com/${IMAGE}:${TAG}
+                        docker push registry.hub.docker.com/${IMAGE}:${TAG}
                         '''
                         
                         sh "docker logout registry.hub.docker.com"
