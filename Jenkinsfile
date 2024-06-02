@@ -28,6 +28,12 @@ pipeline {
             }
         }   
 
+        stage('Verify Docker Image') {
+            steps {
+                sh 'docker images'
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 script {
