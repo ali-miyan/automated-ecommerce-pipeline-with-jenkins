@@ -23,7 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${env.REGISTRY}/${env.IMAGE}:${env.TAG}")
+                    docker.build("${env.IMAGE}:${env.TAG}")
                 }
             }
         }   
