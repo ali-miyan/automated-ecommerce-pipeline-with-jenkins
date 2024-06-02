@@ -32,16 +32,16 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'Aylanesa7', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
 
-                        sh """
-                        echo $DOCKER_PASSWORD | docker login ${REGISTRY} --username $DOCKER_USERNAME --password-stdin
-                        """
+                        sh '''
+                        echo $DOCKER_PASSWORD | docker login registry.hub.docker.com --username $DOCKER_USERNAME --password-stdin
+                        '''
                         
-                        sh """
-                        docker tag ${IMAGE} ${REGISTRY}/${IMAGE}
-                        docker push ${REGISTRY}/${IMAGE}
-                        """
+                        sh '''
+                        docker tag ${IMAGE} registry.hub.docker.com/${IMAGE}
+                        docker push registry.hub.docker.com/${IMAGE}
+                        '''
                         
-                        sh "docker logout ${REGISTRY}"
+                        sh "docker logout registry.hub.docker.com"
                     }
                 }
             }
