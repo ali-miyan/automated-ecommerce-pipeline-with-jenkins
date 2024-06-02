@@ -30,9 +30,18 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry("https://${env.REGISTRY}", "${env.DOCKER_CREDENTIALS_ID}") {
-                        def dok =  docker.image("${env.REGISTRY}/${env.IMAGE}")
-                        dok.push()
+                    withCredentials([usernamePassword(credentialsId: 'Aylanesa7', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+
+                        sh """
+                        echo $DOCKER_PASSWORD | docker login ${REGISTRY} --username $DOCKER_USERNAME --password-stdin
+                        """
+                        
+                        sh """
+                        docker tag ${IMAGE} ${REGISTRY}/${IMAGE}
+                        docker push ${REGISTRY}/${IMAGE}
+                        """
+                        
+                        sh "docker logout ${REGISTRY}"
                     }
                 }
             }
